@@ -1,0 +1,86 @@
+
+body{
+    background-color: #02284b;
+}
+.login{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 2%;
+}
+.login-box{
+    height: 100%;
+    width: 27%;
+    margin: 20px;
+    box-sizing: border-box;
+}
+.login-box .login-logo{
+    margin: 0 auto;
+    height:100px; 
+    width:100px;
+    background-image: url('../assets/images/iaawhitelogo3.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat; 
+}
+.login-box .login-card {
+    border-radius: 5%;
+    margin: 20px;
+    border-bottom: #A41E22 solid 5px;
+    border-top: #A41E22 solid 5px;
+    padding: 20px;
+    background-color: #fff;
+}
+.login-box-msg{
+    color: #10497E;
+    text-align: center;
+    margin-top: 0;
+}
+form{
+    margin: 5px;
+}
+.form-group{
+    margin-top: 20px;
+}
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #585d63;
+}
+form .form-control {
+    display: block;
+    width: 100%;
+    height: 35px;
+    border: 1px solid #b1c1cf;
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box; 
+}
+.btn-block{
+    width: 100%;
+    height: 35px;
+    border: none;
+    background-color: #10497E;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+.btn-block:hover{
+    background-color: #02284b;
+    transition: 0.9s;
+    cursor: pointer;
+}
+.resetlink{
+    text-align: center;
+    margin-top: 40px;
+    color: #611f21;
+}
+.invalid-feedback{
+    color: red;
+}
