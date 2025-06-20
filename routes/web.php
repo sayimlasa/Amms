@@ -13,17 +13,14 @@ use App\Http\Controllers\Admission\Applicants\ApplicantsChoice;
 use App\Http\Controllers\Admissions\Applicants\ApplicantsChoiceController;
 use App\Http\Controllers\Admissions\Applicants\PaymentsController;
 use App\Http\Controllers\Admissions\Settings\ApplicationLevelsController;
+use App\Http\Controllers\Api\AcAssetsController;
+use App\Http\Controllers\Api\BrandsController;
+use App\Http\Controllers\Api\LocationsController;
+use App\Http\Controllers\Api\SupplierSController;
 use App\Http\Controllers\MainDashboradController;
 
-//use App\Http\Controllers\HomeController;
-//e App\Http\Controllers\WebController;
-//use Illuminate\Support\Facades\Auth;
-//use Illuminate\Support\Facades\Route;
-
-
-
+Route::get('/home',  [HomeController::class, 'index'])->name('home');
 Route::get('/',  [HomeController::class, 'index']);
-
 Auth::routes();
 
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
@@ -43,54 +40,14 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::post('users/process-csv-import', [UsersController::class, 'processCsvImport'])->name('users.processCsvImport');
     Route::resource('users', UsersController::class);
     Route::get('myprofile', [UsersController::class, 'myprofile'])->name('myprofile');
-});
 
-Route::middleware(['auth'])->namespace('App\Http\Controllers\Admissions\Settings')->group(function () {
-    Route::resource('academic-years', 'AcademicYearsController');
-    Route::resource('countries', 'CountriesController');
-    Route::resource('regions-states', 'RegionsStatesController');
-    Route::resource('districts', 'DistrictsController');
-    Route::get('get-regions/{country_id}', 'DistrictsController@getRegions')->name('get.regions');
-    Route::resource('nationalities', 'NationalitiesController');
-    Route::resource('campuses', 'CampusesController');
-    Route::get('get-regions/{country_id}', 'CampusesController@getRegions')->name('get.regions');
-    Route::get('get-districts/{district_id}', 'CampusesController@getDistricts')->name('get.districts');
-    Route::resource('intakes', 'IntakesController');
-    Route::resource('application-levels', 'ApplicationLevelsController');
-    Route::resource('application-categories', 'ApplicationCategoriesController');
-    Route::resource('application-windows', 'ApplicationWindowsController');
-    Route::resource('programmes', 'ProgrammesController');
-    Route::resource('disabilities', 'DisabilitiesController');
-    Route::resource('employment-statuses', 'EmploymentStatusesController');
-    Route::resource('marital-statuses', 'MaritalStatusesController');
-    Route::resource('relationships', 'RelationshipsController');
-    Route::resource('employers', 'EmployersController');
-    Route::resource('education-levels', 'EducationLevelsController');
-});
-
-Route::middleware(['auth'])->namespace('App\Http\Controllers\Admissions\Applicants')->group(function () {
-    Route::resource('applicants-users', 'ApplicantsUsersController');
-    Route::resource('applicants-infos', 'ApplicantsInfosController');
-    //payment
-    Route::resource('application-fee','PaymentsController');
-    Route::get('application-fee/check-status/{controlNumber}', [PaymentsController::class, 'checkPaymentStatus'])->name('application-fee.check-status');
-    Route::get('application-fee/check-status/{controlNumber}', [PaymentsController::class, 'checkPaymentStatus'])->name('application-fee.check-status');
-    Route::post('applications/check-status/{billId}', [PaymentsController::class, 'checkPaymentStatus'])->name('refresh.control');
-    Route::post('creantBillID',[PaymentsController::class, 'createBillId'])->name('create.BillId');
-    Route::post('createControlno',[PaymentsController::class, 'generateControlNumber'])->name('generate.controlno');
-    
-    //applicants choices
-    Route::resource('applicants-choice','ApplicantsChoiceController');
-    Route::get('/applicants-choice/get-levels', [ApplicantsChoiceController::class, 'getLevels'])->name('programme.choice');
-
-    Route::resource('application-fee','PaymentsController');
-    Route::get('get-regions/{country_id}', 'ApplicantsInfosController@getRegions')->name('get.regions');
-    Route::get('get-districts/{district_id}', 'ApplicantsInfosController@getDistricts')->name('get.districts');
-    Route::get('get-employers/{employmentStatusId}', 'ApplicantsInfosController@getEmployersByStatus')->name('get-employers');
-    Route::resource('nextof-kins', 'NextOfKinsController');
-    Route::resource('applicants-academics', 'ApplicantsAcademicsController');
-    Route::resource('attachments', ApplicantAttachmentController::class);
-    
+    //ac_assets
+    // Route::get('/ac-assets',[AcAssetsController::class, 'index'])->name('ac-asset.index');
+    // Route::post('/ac-assets/store',[AcAssetsController::class, 'store'])->name('ac-asset.store');
+    // Route::get('/ac-assets/create',[AcAssetsController::class, 'create'])->name('ac-asset.create');
+    //  Route::get('ac-asset/{id}', [AcAssetsController::class, 'edit'])->name('ac-asset.edit');
+    // Route::put('ac-asset/{id}', [AcAssetsController::class, 'update'])->name('ac-asset.update');
+    Route::resource('ac-asset', AcAssetsController::class);
 });
 //Dahsbord
 Route::resource('main',MainDashboradController::class);
@@ -101,6 +58,9 @@ Route::get('/dodoma-campus', [MainDashboradController::class, 'indexDodoma'])->n
 Route::get('/songea-campus', [MainDashboradController::class, 'indexSongea'])->name('songea.campus');
 Route::get('/polisi-campus', [MainDashboradController::class, 'indexPolisi'])->name('polisi.campus');
 Route::get('/magereza-campus', [MainDashboradController::class, 'indexMagereza'])->name('magereza.campus');
+Route::resource('locations', LocationsController::class);
+Route::resource('brands', BrandsController::class);
+Route::resource('suppliers', SupplierSController::class);
 
 
- 
+
