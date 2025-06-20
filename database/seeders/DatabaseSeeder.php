@@ -27,10 +27,6 @@ class DatabaseSeeder extends Seeder
             PermissionRoleTableSeeder::class,
             UsersTableSeeder::class,
             RoleUserTableSeeder::class,
-            NationalSeeder::class,
-            RegionSeeder::class,
-            DistrictSeeder::class,
-            CampusSeeder::class
         ]);
     }
 }

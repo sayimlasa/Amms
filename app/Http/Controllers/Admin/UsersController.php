@@ -106,12 +106,8 @@ class UsersController extends Controller
     public function create()
     {
         abort_if(Gate::denies('user_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $campuses = Campus::pluck('name', 'id');
-
         $roles = Role::pluck('title', 'id');
-
-        return view('admin.users.create', compact('campuses', 'roles'));
+        return view('admin.users.create', compact('roles'));
     }
 
     public function store(StoreUserRequest $request)
@@ -128,13 +124,8 @@ class UsersController extends Controller
     {
         abort_if(Gate::denies('user_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $campuses = Campus::pluck('name','id');
-
         $roles = Role::pluck('title', 'id');
-
-        $user->load('campus', 'roles');
-
-        return view('admin.users.edit', compact('campuses', 'roles', 'user'));
+        return view('admin.users.edit', compact('roles', 'user'));
     }
 
     public function update(UpdateUserRequest $request, User $user)
@@ -144,7 +135,6 @@ class UsersController extends Controller
 
     // Get the roles from the request
     $roleIds = $request->role_id;
-
     // Loop through the role ids
     foreach ($roleIds as $roleId) {
         // Check if the role-user combination already exists
@@ -153,7 +143,6 @@ class UsersController extends Controller
             $user->roles()->attach($roleId);
         }
     }
-
     return redirect()->route('admin.users.index');
 }
     public function show(User $user)

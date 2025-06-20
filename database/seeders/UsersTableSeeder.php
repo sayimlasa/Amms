@@ -26,9 +26,9 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'id'              => 2,
-                'name'            => 'Admission Officer',
+                'name'            => 'fm manager',
                 'campus_id'       =>1,
-                'email'           => 'admission@gmail.com',
+                'email'           => 'fm.manager@gmail.com',
                 'password'        => bcrypt('password'),
                 'mobile'          =>'785987186',
             ],

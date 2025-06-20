@@ -22,10 +22,6 @@ class StoreUserRequest extends FormRequest
                 'string',
                 'required',
             ],
-            'campus_id' => [
-                'required',
-                'integer',
-            ],
             'email' => [
                 'required',
                 'unique:users',

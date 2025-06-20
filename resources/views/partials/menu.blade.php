@@ -186,8 +186,7 @@
                     </div>
                 </li>
                 @endcan           
-                @can('site_setting_access')
-                <li class="nav-item">
+                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#report" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="report">
                         <i class="lab la-whmcs"></i> <span data-key="t-apps">Ac Asset Unit</span>
                     </a>
@@ -227,11 +226,9 @@
                         </ul>
                     </div>
                 </li>
-                @endcan
-                  @can('site_setting_access')
-                <li class="nav-item">
+                   <li class="nav-item">
                     <a class="nav-link menu-link" href="#report" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="report">
-                        <i class="lab la-whmcs"></i> <span data-key="t-apps">Inventory Management </span>
+                        <i class="lab la-whmcs"></i> <span data-key="t-apps">Ac Movement</span>
                     </a>
                     <div class="collapse menu-dropdown" id="report">
                         <ul class="nav nav-sm flex-column">
@@ -269,7 +266,87 @@
                         </ul>
                     </div>
                 </li>
-                @endcan
+                    <li class="nav-item">
+                    <a class="nav-link menu-link" href="#report" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="report">
+                        <i class="lab la-whmcs"></i> <span data-key="t-apps">Ac Service</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="report">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="" class="nav-link {{ request()->is('site-settings') || request()->is("site-settings/*") ? "active" : "" }}">
+
+                                    Site setting
+
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link {{ request()->is('site-settings') || request()->is("site-settings/*") ? "active" : "" }}">
+
+                                SMS Gateways
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link {{ request()->is('site-settings') || request()->is("site-settings/*") ? "active" : "" }}">
+
+                                Payment Gateways
+
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link {{ request()->is('site-settings') || request()->is("site-settings/*") ? "active" : "" }}">
+
+                                Mail settings
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link {{ request()->is("attachments") || request()->is("attachments/*") ? "active" : "" }}">
+                                    Applicant Attachement
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#report" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="report">
+                        <i class="lab la-whmcs"></i> <span data-key="t-apps">Store Inventory</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="report">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="" class="nav-link {{ request()->is('site-settings') || request()->is("site-settings/*") ? "active" : "" }}">
+
+                                    Site setting
+
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link {{ request()->is('site-settings') || request()->is("site-settings/*") ? "active" : "" }}">
+
+                                SMS Gateways
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link {{ request()->is('site-settings') || request()->is("site-settings/*") ? "active" : "" }}">
+
+                                Payment Gateways
+
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link {{ request()->is('site-settings') || request()->is("site-settings/*") ? "active" : "" }}">
+
+                                Mail settings
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link {{ request()->is("attachments") || request()->is("attachments/*") ? "active" : "" }}">
+                                    Applicant Attachement
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+        
             </ul>
         </div>
         <!-- Sidebar -->

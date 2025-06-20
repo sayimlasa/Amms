@@ -27,10 +27,6 @@ class UpdateUserRequest extends FormRequest
                 'string',
                 'min:9',
             ],
-            'campus_id' => [
-                'required',
-                'integer',
-            ],
             'email' => [
                 'required',
                 'unique:users,email,' . $this->route('user')->id,  // Correct use of the user ID in the URL

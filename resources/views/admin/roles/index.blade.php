@@ -1,91 +1,79 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="card">
-        <div class="card-header d-flex justify-content-between">
-            <span>Roles List</span>
-            <a href="{{ route('admin.roles.create') }}" class="btn btn-success">Add New Role</a>
-        </div>
-        <div class="card-body">
-
-            <!-- Display Success Message with Close Button -->
-            @if(session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-
-            <!-- Display Error Message with Close Button -->
-            @if(session('error'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{ session('error') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-
-            <table class="table table-bordered table-striped table-hover" id="rolesTable">
-                <thead>
-                    <tr>
-                        <th>S/N</th>
-                        <th>Role Name</th>
-                        <th>Permissions</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($roles as $role)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $role->title }}</td>
-                            <td>
-                                @foreach($role->permissions as $permission)
-                                    <span class="badge bg-info">{{ $permission->title }}</span>
-                                @endforeach
-                            </td>
-                            <td>
-                                <a href="{{ route('admin.roles.edit', $role->id) }}" class="btn btn-primary">Edit</a>
-                                <a href="{{ route('admin.roles.show', $role->id) }}" class="btn btn-primary">show</a>
-                                
-                                <form action="{{ route('roles.destroy', $role->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+<div style="margin-bottom: 10px;" class="row">
+    @can('role_create')        
+    <div class="col-lg-12">
+        <a class="btn btn-success" href="{{ route('admin.roles.create') }}">
+            Add Role
+        </a>
     </div>
-@endsection
+    @endcan
+</div>
 
-@section('scripts')
-@parent
-<!-- DataTables CSS and JS -->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+<div class="card">
+    <div class="card-header">
+        Role List
+    </div>
 
-<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-        $('#rolesTable').DataTable({
-            paging: true,
-            searching: true,
-            ordering: true,
-            order: [[0, 'asc']],
-            dom: 'Bfrtip',
-            buttons: [
-                'copy',
-                'csvHtml5',
-                'excelHtml5',
-                'pdfHtml5',
-                'print'
-            ]
-        });
-    });
-</script>
+    <div class="card-body">
+        <table class="table table-bordered table-striped table-hover" id="rolesTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Role Name</th>
+                    <th>Permissions</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($roles as $index => $role)
+                <tr>
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ $role->title }}</td>
+                    <td>
+                        @foreach($role->permissions as $permission)
+                        <span class="badge bg-info">{{ $permission->title }}</span>
+                        @endforeach
+                    </td>
+                    <td>
+                        <div class="dropdown d-inline-block">
+                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="ri-more-fill align-middle"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                @can('role_show')
+                                <li>
+                                    <a class="dropdown-item view-item-btn" href="{{ route('admin.roles.show', $role->id) }}">
+                                        <i class="ri-eye-fill align-bottom me-2 text-muted"></i> View
+                                    </a>
+                                </li>
+                                @endcan
+                                @can('role_edit')
+                                <li>
+                                <a class="dropdown-item edit-item-btn" href="{{ route('admin.roles.edit', $role->id) }}">
+                                        <i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit
+                                    </a>
+                                </li>
+                                @endcan
+                                @can('role_delete')                                    
+                                <li>
+                                    <form action="{{ route('admin.roles.destroy', $role->id) }}" method="POST" onsubmit="return confirm('Are you sure?');" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="dropdown-item remove-item-btn btn-danger">
+                                            <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete
+                                        </button>
+                                    </form>
+                                </li>
+                                @endcan
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
 @endsection

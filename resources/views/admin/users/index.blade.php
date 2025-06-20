@@ -10,14 +10,13 @@
 </div>
 <section class="content-header">
     <div class="container-fluid">
-        @can('user_create')
+
         <div class="row mb-2">
             <div class="col-sm-6">
                 <a href="{{route('admin.users.create')}}" class="btn btn-success">Add User</a>
             </div>
         </div>
-        @endcan
-       
+
     </div><!-- /.container-fluid -->
 </section>
 <div class="card">
@@ -29,13 +28,14 @@
             @php $na = 1; @endphp
             <thead>
                 <tr>
-                    <th>Na</th>
+                    <th>S/N</th>
                     <th data-ordering="true" hidden> id</th>
                     <th data-ordering="true"> Full Name</th>
                     <th data-ordering="true">Email Addres</th>
                     <th data-ordering="true"> Mobile</th>
+                    <th data-ordering="true">Campus</th>
                     <th data-ordering="true"> Role</th>
-                     <th data-ordering="true"> Active</th>
+                    <th data-ordering="true"> Active</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -47,13 +47,20 @@
                     <td>{{ $user->name ?? '' }}</td>
                     <td>{{ $user->email ?? '' }}</td>
                     <td>{{ $user->mobile?? '' }}</td>
-                         <!-- Display Role(s) -->
-                         <td>
+                    <td>
+                        @php
+                        $campus = \App\Models\Campus::find($user->campus_id);
+                        @endphp
+                        {{ $campus->name ?? '' }}
+                    </td>
+
+                    <!-- Display Role(s) -->
+                    <td>
                         @foreach($user->roles as $role)
-                            <span class="badge bg-primary">{{ $role->title }}</span>
+                        <span class="badge bg-primary">{{ $role->title }}</span>
                         @endforeach
                     </td>
-                     <td scope="row">
+                    <td scope="row">
                         <div class="form-check">
                             <input class="form-check-input fs-15" type="checkbox" {{ $user->active == 1 ? 'checked' : '' }} disabled>
                         </div>
@@ -64,23 +71,18 @@
                                 <i class="ri-more-fill align-middle"></i>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                @can('user_show')
                                 <li>
                                     <a class="dropdown-item view-item-btn" href="{{ route('admin.users.show', $user->id) }}">
                                         <i class="ri-eye-fill align-bottom me-2 text-muted"></i>
                                         view
                                     </a>
                                 </li>
-                                @endcan
-                                @can('user_edit')
                                 <li>
                                     <a class="dropdown-item edit-item-btn" href="{{ route('admin.users.edit', $user->id) }}">
                                         <i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
                                         edit
                                     </a>
-                                </li> 
-                                @endcan
-                                @can('user_delete')
+                                </li>
                                 <li>
                                     <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('are you sure?');" style="display: inline;">
                                         @csrf
@@ -90,8 +92,7 @@
                                             delete
                                         </button>
                                     </form>
-                                </li> 
-                                @endcan
+                                </li>
                             </ul>
                         </div>
                     </td>
