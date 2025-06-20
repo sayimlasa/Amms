@@ -14,7 +14,9 @@ class BrandsController extends Controller
        $brands = Brand::all();
     return view('brands.index', compact('brands'));
     }
-
+public function create(){
+    return view('brands.create');
+}
     // POST /api/brands
     public function store(Request $request)
     {

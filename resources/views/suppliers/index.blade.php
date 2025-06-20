@@ -15,7 +15,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <a href="{{ route('suppliers.create') }}" class="btn btn-success">Add Location</a>
+                    <a href="{{ route('suppliers.create') }}" class="btn btn-success">Add supplier</a>
                 </div>
             </div>
         </div>

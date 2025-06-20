@@ -8,12 +8,15 @@ use App\Http\Controllers\Controller;
 
 class SupplierSController extends Controller
 {
-      public function index()
+    public function index()
     {
         $suppliers = Supplier::all();
-    return view('suppliers.index', compact('suppliers'));
+        return view('suppliers.index', compact('suppliers'));
     }
-
+    public function create()
+    {
+        return view('suppliers.create');
+    }
     public function store(Request $request)
     {
         $request->validate([

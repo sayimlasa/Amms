@@ -13,7 +13,9 @@ class LocationsController extends Controller
    $locations = Location::all();
     return view('locations.index', compact('locations'));
     }
-
+public function create(){
+    return view('locations.create');
+}
     public function store(Request $request)
     {
         $request->validate(['name' => 'required|string|unique:locations,name']);
