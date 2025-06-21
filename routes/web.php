@@ -1,23 +1,24 @@
 <?php
 
-use App\Http\Controllers\Admissions\Applicants\ApplicantAttachmentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Api\BrandsController;
 //use App\Http\Controllers\RolesController;
-use App\Http\Controllers\Admin\PermissionsController;
 use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\UsersController;
-use App\Http\Controllers\Admission\Applicants\ApplicantsChoice;
-use App\Http\Controllers\Admissions\Applicants\ApplicantsChoiceController;
-use App\Http\Controllers\Admissions\Applicants\PaymentsController;
-use App\Http\Controllers\Admissions\Settings\ApplicationLevelsController;
 use App\Http\Controllers\Api\AcAssetsController;
-use App\Http\Controllers\Api\BrandsController;
 use App\Http\Controllers\Api\LocationsController;
 use App\Http\Controllers\Api\SupplierSController;
 use App\Http\Controllers\MainDashboradController;
+use App\Http\Controllers\Api\AcMovementController;
+use App\Http\Controllers\Admin\PermissionsController;
+use App\Http\Controllers\Admission\Applicants\ApplicantsChoice;
+use App\Http\Controllers\Admissions\Applicants\PaymentsController;
+use App\Http\Controllers\Admissions\Settings\ApplicationLevelsController;
+use App\Http\Controllers\Admissions\Applicants\ApplicantsChoiceController;
+use App\Http\Controllers\Admissions\Applicants\ApplicantAttachmentController;
 
 Route::get('/home',  [HomeController::class, 'index'])->name('home');
 Route::get('/',  [HomeController::class, 'index']);
@@ -47,7 +48,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     // Route::get('/ac-assets/create',[AcAssetsController::class, 'create'])->name('ac-asset.create');
     //  Route::get('ac-asset/{id}', [AcAssetsController::class, 'edit'])->name('ac-asset.edit');
     // Route::put('ac-asset/{id}', [AcAssetsController::class, 'update'])->name('ac-asset.update');
-    Route::resource('ac-asset', AcAssetsController::class);
 });
 //Dahsbord
 Route::resource('main',MainDashboradController::class);
@@ -61,6 +61,12 @@ Route::get('/magereza-campus', [MainDashboradController::class, 'indexMagereza']
 Route::resource('locations', LocationsController::class);
 Route::resource('brands', BrandsController::class);
 Route::resource('suppliers', SupplierSController::class);
+Route::resource('ac-assets', AcAssetsController::class);
+Route::resource('ac-movements', AcMovementController::class);
+Route::get('/ac-assets/{id}', [AcAssetsController::class, 'getAsset'])->name('ac-assets.get');
+
+
+
 
 
 

@@ -35,6 +35,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('brands', BrandsController::class);
     Route::apiResource('locations', LocationsController::class);
     Route::apiResource('suppliers', SupplierSController::class);
-    Route::apiResource('ac-assets', AcAssetsController::class);
+    //Route::apiResource('ac-assets', AcAssetsController::class);
 
 });

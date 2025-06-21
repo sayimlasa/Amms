@@ -61,7 +61,7 @@
 
                          <div class="col-md-6">
                              <label for="warranty_expiry_date" class="form-label">Warranty Expiry Date</label>
-                             <input type="text" class="form-control" name="warranty_expiry_date"
+                             <input type="date" class="form-control" name="warranty_expiry_date"
                                  value="{{ old('warranty_expiry_date') }}">
                          </div>
 

@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('ac_assets', function (Blueprint $table) {
+            $table->id();
             $table->string('serial_number', 200)->unique();
             $table->string('reference_number', 200)->nullable();
             $table->foreignId('supplier_id')->nullable()->constrained('suppliers')->onDelete('set null');

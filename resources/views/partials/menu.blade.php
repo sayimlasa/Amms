@@ -4,7 +4,7 @@
         <!-- Light Logo-->
         <a href="{{ route('home') }}" class="logo logo-light">
             <span class="logo-sm">
-                <img src="{{ url('assets/images/iaawhitelogo3.png') }}" alt="" height="30">
+                <img src="{{ url('assets/images/iaawhitelogo.png') }}" alt="" height="30">
             </span>
             <span class="logo-lg">
                 <img src="{{ url('assets/images/iaalogoword3.png') }}" alt="" height="50" class="menu-logo">
@@ -114,7 +114,7 @@
                 <div class="collapse menu-dropdown" id="reportac">
                     <ul class="nav nav-sm flex-column">
                         <li class="nav-item">
-                            <a href="{{ route('admin.ac-asset.index') }}"
+                            <a href="{{ route('ac-assets.index') }}"
                                 class="nav-link {{ request()->is('site-settings') || request()->is('site-settings/*') ? 'active' : '' }}">
                                 Manage Asset Unit
                             </a>
@@ -130,7 +130,7 @@
                 <div class="collapse menu-dropdown" id="reportam">
                     <ul class="nav nav-sm flex-column">
                         <li class="nav-item">
-                            <a href=""
+                            <a href="{{ route('ac-movements.index') }}"
                                 class="nav-link {{ request()->is('site-settings') || request()->is('site-settings/*') ? 'active' : '' }}">
                                 Manage AC movement
                             </a>

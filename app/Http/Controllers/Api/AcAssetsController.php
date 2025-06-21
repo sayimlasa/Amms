@@ -84,43 +84,44 @@ class AcAssetsController extends Controller
         $asset = AcAsset::create($validated);
         return response()->json(['message' => 'AC Asset stored successfully.', 'data' => $asset], 201);
     }
-    public function create(){
-        $suppliers=Supplier::all();
-        $locations=Location::all();
-        $brands=Brand::all();
-     return view('ac_assets.create', compact('suppliers','locations','brands'));
+    public function create()
+    {
+        $suppliers = Supplier::all();
+        $locations = Location::all();
+        $brands = Brand::all();
+        return view('ac_assets.create', compact('suppliers', 'locations', 'brands'));
     }
-public function store(Request $request)
-{
-    // Validate the incoming request
-    $validated = $request->validate([
-        'serial_number' => 'required|string|max:200|unique:ac_assets',
-        'reference_number' => 'nullable|string|max:200',
-        'supplier_id' => 'nullable|exists:suppliers,id',
-        'brand_id' => 'nullable|exists:brands,id',
-        'warranty_expiry_date' => 'nullable|string|max:200',
-        'warranty_number' => 'nullable|string|max:200',
-        'model' => 'nullable|string|max:200',
-        'type' => 'nullable|string|max:200',
-        'capacity' => 'nullable|string|max:200',
-        'derivery_note_number' => 'nullable|string|max:200',
-        'derivery_note_date' => 'nullable|date',
-        'lpo_no' => 'nullable|string|max:100',
-        'invoice_date' => 'nullable|date',
-        'invoice_no' => 'nullable|string|max:200',
-        'installation_date' => 'nullable|date',
-        'installed_by' => 'nullable|string|max:200',
-        'condition' => 'required|in:New,Mid-used,Old',
-        'status' => 'required|in:Working,Under Repair,Scrapped',
-        'location_id' => 'nullable|exists:locations,id',
-        'justification_form_no' => 'nullable|string|max:200',
-        'created_by' => 'nullable|exists:users,id',
-    ]);
-    // Create the asset
-    AcAsset::create($validated);
-    // Redirect back with a success message
-    return redirect()->route('admin.ac-asset.index')->with('success', 'Asset created successfully!');
-}
+    public function store(Request $request)
+    {
+        // Validate the incoming request
+        $validated = $request->validate([
+            'serial_number' => 'required|string|max:200|unique:ac_assets',
+            'reference_number' => 'nullable|string|max:200',
+            'supplier_id' => 'nullable|exists:suppliers,id',
+            'brand_id' => 'nullable|exists:brands,id',
+            'warranty_expiry_date' => 'nullable|string|max:200',
+            'warranty_number' => 'nullable|string|max:200',
+            'model' => 'nullable|string|max:200',
+            'type' => 'nullable|string|max:200',
+            'capacity' => 'nullable|string|max:200',
+            'derivery_note_number' => 'nullable|string|max:200',
+            'derivery_note_date' => 'nullable|date',
+            'lpo_no' => 'nullable|string|max:100',
+            'invoice_date' => 'nullable|date',
+            'invoice_no' => 'nullable|string|max:200',
+            'installation_date' => 'nullable|date',
+            'installed_by' => 'nullable|string|max:200',
+            'condition' => 'required|in:New,Mid-used,Old',
+            'status' => 'required|in:Working,Under Repair,Scrapped',
+            'location_id' => 'nullable|exists:locations,id',
+            'justification_form_no' => 'nullable|string|max:200',
+            'created_by' => 'nullable|exists:users,id',
+        ]);
+        // Create the asset
+        AcAsset::create($validated);
+        // Redirect back with a success message
+        return redirect()->route('ac-assets.index')->with('success', 'Asset created successfully!');
+    }
 
     public function show($id)
     {
@@ -130,13 +131,13 @@ public function store(Request $request)
         }
         return response()->json($asset);
     }
-   public function edit($id)
+    public function edit(AcAsset $acAsset)
     {
-        // Load asset with its location
-        $asset = AcAsset::findOrFail($id);
-        // Get all locations for dropdown
         $locations = Location::all();
-        return view('admin.ac-asset.edit', compact('asset', 'locations'));
+        return view('ac_assets.edit', [
+            'asset' => $acAsset,
+            'locations' => $locations
+        ]);
     }
     public function update(Request $request, $id)
     {
@@ -160,8 +161,8 @@ public function store(Request $request)
         $asset->location_id = $validated['location_id'];
         $asset->save();
         // Redirect back with success message
-        return redirect()->route('admin.ac-asset.index')
-                         ->with('success', 'AC Asset updated successfully.');
+        return redirect()->route('ac-asset.index')
+            ->with('success', 'AC Asset updated successfully.');
     }
     public function updateapi(Request $request, $id)
     {

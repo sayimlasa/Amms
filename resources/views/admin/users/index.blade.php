@@ -33,7 +33,6 @@
                     <th data-ordering="true"> Full Name</th>
                     <th data-ordering="true">Email Addres</th>
                     <th data-ordering="true"> Mobile</th>
-                    <th data-ordering="true">Campus</th>
                     <th data-ordering="true"> Role</th>
                     <th data-ordering="true"> Active</th>
                     <th>Action</th>
@@ -47,12 +46,6 @@
                     <td>{{ $user->name ?? '' }}</td>
                     <td>{{ $user->email ?? '' }}</td>
                     <td>{{ $user->mobile?? '' }}</td>
-                    <td>
-                        @php
-                        $campus = \App\Models\Campus::find($user->campus_id);
-                        @endphp
-                        {{ $campus->name ?? '' }}
-                    </td>
 
                     <!-- Display Role(s) -->
                     <td>
