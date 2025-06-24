@@ -32,7 +32,6 @@
                     <th>Serial Number</th>
                     <th>From Location</th>
                     <th>To Location</th>
-                    <th>Moved By</th>
                     <th>Remark</th>
                     <th>Time Moved</th>
                     <th>Actions</th>
@@ -46,7 +45,7 @@
                         <td>{{ $movement->acAsset->serial_number ?? '-' }}</td>
                         <td>{{ $movement->fromLocation->name ?? '-' }}</td>
                         <td>{{ $movement->toLocation->name ?? '-' }}</td>
-                        <td>{{ $movement->movedBy->name ?? '-' }}</td>
+                        {{-- <td>{{ $movement->movedBy->name ?? '-' }}</td> --}}
                         <td>{{ $movement->remark ?? '-' }}</td>
                         <td>{{ $movement->updated_at ? $movement->updated_at->format('Y-m-d H:i') : '-' }}</td>
                         <td>

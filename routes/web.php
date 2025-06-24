@@ -19,6 +19,7 @@ use App\Http\Controllers\Admissions\Applicants\PaymentsController;
 use App\Http\Controllers\Admissions\Settings\ApplicationLevelsController;
 use App\Http\Controllers\Admissions\Applicants\ApplicantsChoiceController;
 use App\Http\Controllers\Admissions\Applicants\ApplicantAttachmentController;
+use App\Http\Controllers\ReportsController;
 
 Route::get('/home',  [HomeController::class, 'index'])->name('home');
 Route::get('/',  [HomeController::class, 'index']);
@@ -42,12 +43,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::resource('users', UsersController::class);
     Route::get('myprofile', [UsersController::class, 'myprofile'])->name('myprofile');
 
-    //ac_assets
-    // Route::get('/ac-assets',[AcAssetsController::class, 'index'])->name('ac-asset.index');
-    // Route::post('/ac-assets/store',[AcAssetsController::class, 'store'])->name('ac-asset.store');
-    // Route::get('/ac-assets/create',[AcAssetsController::class, 'create'])->name('ac-asset.create');
-    //  Route::get('ac-asset/{id}', [AcAssetsController::class, 'edit'])->name('ac-asset.edit');
-    // Route::put('ac-asset/{id}', [AcAssetsController::class, 'update'])->name('ac-asset.update');
 });
 //Dahsbord
 Route::resource('main',MainDashboradController::class);
@@ -64,6 +59,12 @@ Route::resource('suppliers', SupplierSController::class);
 Route::resource('ac-assets', AcAssetsController::class);
 Route::resource('ac-movements', AcMovementController::class);
 Route::get('/ac-assets/{id}', [AcAssetsController::class, 'getAsset'])->name('ac-assets.get');
+Route::get('/track/history', [ReportsController::class, 'index'])->name('track.history');
+Route::get('/reference/{id}', [AcAssetsController::class, 'getReference'])->name('ac-assets.reference');
+Route::get('/dasboard', [ReportsController::class, 'sample'])->name('sample');
+Route::get('/attachments', [AcAssetsController::class, 'attachments'])->name('attachments.index');
+
+
 
 
 

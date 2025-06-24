@@ -17,16 +17,7 @@
         color: #fff;
     }
 </style>
-@can('dashboard_access')
-@include('dashboards.adminDashboard')
-@include('dashboards.facilitatorDashboard')
-@include('dashboards.studentDashboard')
-@include('dashboards.hodsDashboard')
-@include('dashboards.accountantDashboard')
-@include('dashboards.examofficeDashboard')
-@include('dashboards.managersDashboard')
-@include('dashboards.rectorDashboard')
-@endcan
+ @include('dashboards.adminiDashboard')
 @endsection
 @section('scripts')
 @parent

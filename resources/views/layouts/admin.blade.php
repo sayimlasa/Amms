@@ -123,7 +123,7 @@
                             <button type="button" class="btn btn-icon btn-topbar material-shadow-none btn-ghost-secondary rounded-circle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img id="header-lang-img" src="{{url('assets/images/flags/us.svg')}}" alt="Lang" height="20" class="rounded">
                             </button>
-                            <div class="dropdown-menu dropdown-menu-end">
+                            {{-- <div class="dropdown-menu dropdown-menu-end">
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item language py-2" data-lang="en" title="English">
@@ -171,7 +171,7 @@
                                     <img src="{{url('assets/images/flags/ae.svg')}}" alt="user-image" class="me-2 rounded" height="18">
                                     <span class="align-middle">Arabic</span>
                                 </a>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="dropdown topbar-head-dropdown ms-1 header-item">
                             <button type="button" class="btn btn-icon btn-topbar material-shadow-none btn-ghost-secondary rounded-circle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -1,8 +1,16 @@
-
-body{
-    background-color: #02284b;
+/* Full-page background image */
+ /*body {
+   background-image: url('../assets/images/jarufu.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Source Sans Pro', sans-serif;
 }
-.login{
+
+/* Login wrapper */
+.login {
     height: 100%;
     width: 100%;
     display: flex;
@@ -10,77 +18,104 @@ body{
     align-items: center;
     box-sizing: border-box;
     padding: 2%;
+    position: relative;
 }
-.login-box{
-    height: 100%;
-    width: 27%;
-    margin: 20px;
-    box-sizing: border-box;
+
+/* Login box container */
+.login-box {
+    width: 100%;
+    max-width: 400px;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
 }
-.login-box .login-logo{
+
+/* Logo on top of login form */
+.login-box .login-logo {
     margin: 0 auto;
-    height:100px; 
-    width:100px;
-    background-image: url('../assets/images/iaawhitelogo3.png');
+    height: 100px;
+    width: 100px;
+    background-image: url('../assets/images/jarufu.jpeg');
     background-size: 100% 100%;
     background-position: center;
-    background-repeat: no-repeat; 
-}
-.login-box .login-card {
-    border-radius: 5%;
-    margin: 20px;
-    border-bottom: #A41E22 solid 5px;
-    border-top: #A41E22 solid 5px;
-    padding: 20px;
-    background-color: #fff;
-}
-.login-box-msg{
-    color: #10497E;
-    text-align: center;
-    margin-top: 0;
-}
-form{
-    margin: 5px;
-}
-.form-group{
+    background-repeat: no-repeat;
     margin-top: 20px;
 }
+
+/* Login card body */
+.login-card {
+    border-top: 5px solid #A41E22;
+    border-bottom: 5px solid #A41E22;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 0 0 10px 10px;
+}
+
+/* "Sign in" title */
+.login-box-msg {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    color: #02284b;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+/* Form label */
 label {
     display: block;
-    margin-bottom: 10px;
-    font-size: 18px;
+    margin-bottom: 8px;
+    font-size: 16px;
     font-weight: 600;
     color: #585d63;
 }
+
+/* Input fields */
 form .form-control {
-    display: block;
     width: 100%;
-    height: 35px;
+    height: 40px;
     border: 1px solid #b1c1cf;
     border-radius: 5px;
-    padding: 10px;
-    box-sizing: border-box; 
+    padding: 8px 12px;
+    box-sizing: border-box;
+    font-size: 14px;
 }
-.btn-block{
+
+/* Margin spacing for form groups */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Login button */
+.btn-block {
     width: 100%;
-    height: 35px;
+    height: 40px;
     border: none;
-    background-color: #10497E;
+    background-color: #A41E22;
     color: #fff;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 600;
     margin-top: 10px;
+    border-radius: 5px;
+    transition: 0.3s ease;
 }
-.btn-block:hover{
+
+.btn-block:hover {
     background-color: #02284b;
-    transition: 0.9s;
     cursor: pointer;
 }
-.resetlink{
+
+/* Forgot password link */
+.resetlink {
     text-align: center;
-    margin-top: 40px;
+    margin-top: 30px;
     color: #611f21;
+    font-size: 14px;
 }
-.invalid-feedback{
+
+/* Error feedback */
+.invalid-feedback {
     color: red;
+    font-size: 13px;
 }

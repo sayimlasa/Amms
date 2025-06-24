@@ -23,7 +23,7 @@
           <div class="d-flex">
             <div class="flex-grow-1">
               <p class="text-muted fw-medium">Total Campuses</p>
-              <h4 class="text-success">{{$totalCampuses}}</h4>
+              <h4 class="text-success">{{$acassets}}</h4>
             </div>
             <div class="avatar-sm">
               <span class="avatar-title bg-light text-success rounded-circle">

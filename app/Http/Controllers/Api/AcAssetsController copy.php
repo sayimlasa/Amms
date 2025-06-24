@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use App\Models\AssetAttachment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -118,8 +117,8 @@ class AcAssetsController extends Controller
             'lpo_no' => 'nullable|string|max:100',
             'invoice_date' => 'nullable|date',
             'invoice_no' => 'nullable|string|max:200',
-            'derivery_note_attachment' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
-            'invoice_number_attachment' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            // 'installation_date' => 'nullable|date',
+            // 'installed_by' => 'nullable|string|max:200',
             'condition' => 'required|in:New,Mid-used,Old',
             'status' => 'required|in:Working,Under Repair,Scrapped',
             'location_id' => 'nullable|exists:locations,id',
@@ -128,29 +127,21 @@ class AcAssetsController extends Controller
         ]);
         // Create the asset
         AcAsset::create($validated);
-        $dataToUpdate = [
-            'invoice_no' => $validated['invoice_no'],
-            'derivery_note_number' => $validated['derivery_note_number'],
-        ];
-        // Handle invoice number attachment
-        if ($request->hasFile('invoice_number_attachment')) {
-            $invoicePath = $request->file('invoice_number_attachment')->store('attachments', 'public');
-            $dataToUpdate['invoice_number_attachment'] = $invoicePath;
-        }
-
-        // Handle delivery note attachment
-        if ($request->hasFile('derivery_note_attachment')) {
-            $deliveryPath = $request->file('derivery_note_attachment')->store('attachments', 'public');
-            $dataToUpdate['derivery_note_attachment'] = $deliveryPath;
-        }
-
-        $attachments = AssetAttachment::updateOrCreate(
-            ['serial_number' => $validated['serial_number']],
-            $dataToUpdate
-        );
-        //Redirect back with a success message
+        // Redirect back with a success message
         return redirect()->route('ac-assets.index')->with('success', 'Asset created successfully!');
     }
+
+    // public function show($id)
+    // {
+    //     $asset = AcAsset::with(['supplier', 'brand', 'location'])->find($id);
+    //     if (!$asset) {
+    //         return response()->json(['message' => 'Asset not found.'], 404);
+    //     }
+    //     return response()->json($asset);
+    // }
+
+
+
     public function show($id)
     {
         // Load asset with its movements and related models
@@ -244,12 +235,5 @@ class AcAssetsController extends Controller
         }
         $asset->delete();
         return response()->json(['message' => 'Asset deleted.']);
-    }
-    public function attachments()
-    {
-        // Retrieve all asset attachment records
-        $attachments = AssetAttachment::latest()->get();
-        // Return to a blade view with data
-        return view('ac_assets.index-attachments', compact('attachments'));
     }
 }

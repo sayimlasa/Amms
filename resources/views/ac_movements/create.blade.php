@@ -1,4 +1,4 @@
- @extends('layouts.admin')
+@extends('layouts.admin')
 
 @section('title', 'AC Movement')
 
@@ -34,7 +34,7 @@
                         </select>
                     </div>
 
-                    {{-- Reference Number (auto-filled) --}}
+                    {{-- Reference Number --}}
                     <div class="col-md-6">
                         <label for="reference_number" class="form-label">Reference Number</label>
                         <input type="text" name="reference_number" id="reference_number"
@@ -69,7 +69,7 @@
                         <textarea name="remark" class="form-control" rows="3">{{ old('remark') }}</textarea>
                     </div>
 
-                    {{-- Submit Button --}}
+                    {{-- Submit --}}
                     <div class="col-12 text-center mt-3">
                         <button type="submit" class="btn btn-success">Save</button>
                     </div>
@@ -80,41 +80,37 @@
 </div>
 @endsection
 
-@push('styles')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-@endpush
-
 @push('scripts')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            $('.select2').select2({
-                placeholder: 'Select an option',
-                allowClear: true,
-                width: '100%'
-            });
-
-            // When Serial Number changes, fetch its reference_number
-            $('#ac_id').on('change', function () {
-                let assetId = $(this).val();
-                if (assetId) {
-                    $.ajax({
-                        url: '/ac-assets/' + assetId, // Adjust this if using /admin/
-                        method: 'GET',
-                        dataType: 'json',
-                        success: function (data) {
-                            $('#reference_number').val(data.reference_number || '');
-                        },
-                        error: function () {
-                            $('#reference_number').val('');
-                        }
-                    });
-                } else {
-                    $('#reference_number').val('');
-                }
-            });
+<script>
+    $(document).ready(function () {
+        $('.select2').select2({
+            placeholder: 'Select an option',
+            allowClear: true,
+            width: '100%'
         });
-    </script>
+
+        $('#ac_id').on('change', function () {
+            let assetId = $(this).val();
+            if (assetId) {
+                $.ajax({
+                    url: "{{ url('/reference') }}/" + assetId, // ✅ Use Laravel url() helper
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        $('#reference_number').val(data.reference_number || '');
+                    },
+                    error: function (xhr) {
+                        console.error('Error loading reference number:', xhr.responseText);
+                        $('#reference_number').val('');
+                    }
+                });
+            } else {
+                $('#reference_number').val('');
+            }
+        });
+    });
+</script>
 @endpush
